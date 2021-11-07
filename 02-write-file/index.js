@@ -8,12 +8,13 @@ const file = fs.createWriteStream(path.join(__dirname, "text.txt"), "utf8");
 console.log(
   `\nPlease, enter smth to add to text.txt file. If you want to conclude the input, please enter 'exit' or push Ctrl+C \n`
 );
-// process.on("SIGINT", () =>
-//   console.log(`\nThe input is finished. File record complete.\n`)
-// );
+
+process.on("exit", () => {
+  console.log(`\nThe input is finished. File record complete.\n`);
+});
+
 rl.on("line", (line) => {
   if (line.toLowerCase() == "exit") {
-    console.log(`\nThe input is finished. File record complete.\n`);
     rl.close();
   } else {
     file.write(line + "\n");

@@ -2,9 +2,9 @@ const fs = require("fs");
 const path = require("path");
 
 const src = path.join(__dirname, "styles");
-const dest = path.join(__dirname, "project-dist");
+const dest = path.join(__dirname, "project-dist", "bundle.css");
 
-let style = '';
+let style = "";
 
 fs.readdir(src, { withFileTypes: true }, (err, files) => {
   if (err) throw err;
@@ -14,10 +14,7 @@ fs.readdir(src, { withFileTypes: true }, (err, files) => {
       fs.readFile(filePath, "utf8", (err, data) => {
         if (err) throw err;
         style += data;
-        const file = fs.createWriteStream(
-          path.join(dest, "bundle.css"),
-          "utf8"
-        );
+        const file = fs.createWriteStream(dest, "utf8");
         file.write(style);
       });
     }
