@@ -3,6 +3,7 @@ const path = require("path");
 
 async function copyDir(src, dest) {
   const entries = await fs.readdir(src, { withFileTypes: true });
+  await fs.rmdir(dest, { recursive: true });
   await fs.mkdir(dest, { recursive: true });
   for (let entry of entries) {
     const srcPath = path.join(src, entry.name);
