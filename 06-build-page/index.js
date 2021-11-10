@@ -55,7 +55,7 @@ async function replaceComponents(componentsSrc, files) {
 
 async function copyAssets(src, dest) {
   const entries = await fsp.readdir(src, { withFileTypes: true });
-  await fsp.rmdir(dest, { recursive: true });
+  await fsp.rm(dest, { force: true, recursive: true });
   await fsp.mkdir(dest, { recursive: true });
   for (let entry of entries) {
     const srcPath = path.join(src, entry.name);
